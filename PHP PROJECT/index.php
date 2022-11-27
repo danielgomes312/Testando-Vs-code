@@ -10,14 +10,22 @@
 
 <?php
 $array = [
-
+    'nome' => 'Daniel',
+    'idade' => '25',
+    'empresa' => 'Virtex',
+    'cor' => 'vermelho',
+    'profissao' => 'atendente de telemarketing'
 ];
-
-foreach($array as $item) {
-    echo $item."</br>";
-}
-
 ?>
+
+<table border="1">
+    <?php foreach($array as $chave => $valor): ?>
+        <tr>
+            <td><?php echo $chave; ?></td>
+            <td><?php echo $valor; ?></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
 
 </body>
 </html>
