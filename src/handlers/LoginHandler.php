@@ -5,6 +5,7 @@ use \src\models\User;
 
 
 class LoginHandler {
+    # Função para redirecionar para a pagina de login caso o usuario não estiver cadastrado.
     public static function checkLogin() {
         if(!empty($_SESSION['token'])) {
             $token = $_SESSION['token'];
@@ -23,5 +24,53 @@ class LoginHandler {
         } 
         
         return false;
+    }
+    #função para verifica se o login está correto, e entrar no site.
+    public static function verifyLogin($email, $password) {
+        # Verificador de email.
+        $user = User::select()->where('email', $email)->one();
+
+        if($user) {
+            if(password_verify($password, $user['password'])) {
+                $token = md5(time().rand(0,9999).time());
+
+                User::update()
+                    ->set('token', $token)
+                    ->where('email', $email)
+                ->execute();
+
+                return $token;
+            }
+        }
+
+        return false;
+
+    }
+
+    public static function emailExists($email) {
+        $user = User::select()->where('email', $email)->one();
+        return $user ? true : false;
+    }
+
+    # Verificação de usuario e adicionar usuario.
+    # OBS: paremetros de uma fusção, é o que a função exige para ser execultada.
+    # exemplo: addUser($name, $email, $password, $birthdate)
+
+    public static function addUser($name, $email, $password, $birthdate) {
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $token = md5(time().rand(0,9999).time());
+
+        # função insert() já para mandar os dados para o banco de Dados, utilizando o PHPMYADMIN pela primeira vez.
+        user::insert([
+            'email' => $email,
+            'password' => $password,
+            'name' => $name,
+            'birthdate' => $birthdate,
+            'avatar' => 'defaut.jpg',
+            'cover' => 'cover.jpg',
+            'token' => $token
+        ])->execute();
+
+        return $token;
     }
 }
