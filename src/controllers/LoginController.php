@@ -6,9 +6,6 @@ use src\handlers\LoginHandler;
 
 class LoginController extends Controller {
 
-
-    # Public function works without any restrictions. Public functions works outside of the class, inside of the class within the programming code in PHP and in some other programming languages too. Public function/functions make the whole content in its class make available to the other class only when it is accessed. 
-
     public function signin() {
         # criando a variavel $flash.
         $flash = '';
@@ -39,6 +36,7 @@ class LoginController extends Controller {
                 $this->redirect('/login');
             }
         } else {
+            $_SESSION['flash'] = 'Campo vazio';
             $this->redirect('/login');
         }
     }
@@ -46,13 +44,11 @@ class LoginController extends Controller {
     public function signup() {
         # criando a variavel $flash.
         $flash = '';
-        # Mostrar mensagem de erro caso não for um usuario cadastrado
+        # Mostrar mensagem de erro caso já for um usuario cadastrado
         if(!empty($_SESSION['flash'])) {
             $flash = $_SESSION['flash'];
             $_SESSION['flash'] = '';
         }
-        #isso aqui deveria impedir a mensagem de continua depois do "F5" mas não está funcionando.
-        #agora está funcionando.
         $this->render('signup', [
             'flash' => $flash
         ]);
@@ -95,6 +91,7 @@ class LoginController extends Controller {
         # Caso não cumprir com os criterios retorna para a pagina de cadastro.
 
         } else {
+            $_SESSION['flash'] = 'Campos Vazios!';
             $this->redirect('/cadastro');
         }
     }

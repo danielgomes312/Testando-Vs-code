@@ -32,7 +32,7 @@ class LoginHandler {
 
         if($user) {
             if(password_verify($password, $user['password'])) {
-                $token = md5(time().rand(0,9999).time());
+                $token = 'md5(time().rand(0,9999).time())';
 
                 User::update()
                     ->set('token', $token)
@@ -63,11 +63,9 @@ class LoginHandler {
         # função insert() já para mandar os dados para o banco de Dados, utilizando o PHPMYADMIN pela primeira vez.
         user::insert([
             'email' => $email,
-            'password' => $password,
+            'password' => $hash,
             'name' => $name,
             'birthdate' => $birthdate,
-            'avatar' => 'defaut.jpg',
-            'cover' => 'cover.jpg',
             'token' => $token
         ])->execute();
 

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Login - PHP</title>
+    <title>Cadastro - PHP</title>
     <meta name="viewport" content="<?=$base;?>/width=device-width,minimum-scale=1,initial-scale=1"/>
     <link rel="stylesheet" href="<?=$base;?>/assets/css/login.css" />
 </head>
@@ -14,9 +14,6 @@
     </header>
     <section class="container main">
         <form method="POST" action="<?=$base?>/cadastro">
-            <!--Verificação para que a mensagem de erro apareça no html em caso de senha ou email incorretos
-        
-            OBS: não considera se os campos estiverem vazios-->
             <?php if(!empty($flash)): ?>
                 <div class="flash"><?php echo $flash; ?></div>
             <?php endif; ?>

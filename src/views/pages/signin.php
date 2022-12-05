@@ -14,9 +14,6 @@
     </header>
     <section class="container main">
         <form method="POST" action="<?=$base?>/login">
-            <!--Verificação para que a mensagem de erro apareça no html em caso de senha ou email incorretos
-        
-            OBS: não considera se os campos estiverem vazios-->
             <?php if(!empty($flash)): ?>
                 <div class="flash"><?php echo $flash; ?></div>
             <?php endif; ?>
