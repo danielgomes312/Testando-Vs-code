@@ -12,3 +12,10 @@ $router->post('/login', 'LoginController@signinAction');
 
 $router->get('/cadastro', 'LoginController@signup');
 $router->post('/cadastro', 'LoginController@signupAction');
+
+//router->get('/pesquisa');
+//router->get('/sair');
+//router->get('/perfil');
+//router->get('/amigos');
+//router->get('/fotos');
+//router->get('/config');
